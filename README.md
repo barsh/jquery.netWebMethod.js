@@ -29,6 +29,18 @@ Forces requests not to be cached by the browser.
 If set to true, requests can be cached by the browser.
 When false, a POST parameter named $.netWebMethodTimeStamp is appended to the request.
 
+###showLoadingMessage (optional)
+Default: true
+Shows a message while the request is loading. This is useful when it is important to convey that a process is pending.
+If jQueryMobile is detected the spinner will be displayed.  
+If not, a loading message selector must be specified, see loadingMessageSelector.
+
+###loadingMessageSelector (optional)
+If a selector is specified matching elements will be made visible while the request is loading.
+If jQueryMobile is detected the spinner will be displayed in place of matching elements.  
+See jQuery documentation for help with selectors: http://api.jquery.com/category/selectors
+
+
 ##Installation
 Include script after the jQuery library:
 
@@ -77,6 +89,16 @@ Pass parameters to a web method that get the current date and time from the serv
         success: function(response) { alert(response); },
         error: function(error) { alert(error); }
     });
+
+Show loading message:
+
+    $.netWebMethod({
+        url: 'WebForm1.aspx/GetDate',
+        success: function (response) { alert(response); },
+        error: function (error) { alert(error); },
+		loadingMessageSelector: '#loadingMessage'
+    });
+
 
 
 ## Sample ASPX server side code for Web Methods

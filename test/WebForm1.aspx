@@ -38,7 +38,8 @@
                 $.netWebMethod({
                     url: 'WebForm1.aspx/GetDate',
                     success: function (response) { alert(response); },
-                    error: function (error) { alert(error); }
+                    error: function (error) { alert(error); },
+                    loadingMessageSelector: '#loadingMessage'
                 });
             });
 
@@ -47,9 +48,12 @@
                     url: 'WebForm1.aspx/GetDateWith',
                     params: { favFruit: 'apple', favNumber: 1, isMale: true },
                     success: function (response) { alert(response); },
-                    error: function (error) { alert(error); }
+                    error: function (error) { alert(error); },
+                    loadingMessageSelector: '#loadingMessage'
                 });
             });
+            
+
         });
 
     </script>
@@ -67,6 +71,7 @@
         
         <input type="button" value="Get Date With" id="getDateWith"/><br/><br/><br/>
         
+        <div id="loadingMessage" style="display:none">Loading...</div>
     </form>
 </body>
 </html>
