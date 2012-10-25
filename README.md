@@ -24,13 +24,13 @@ A function to be called if the request fails.
 The function receives one argument: The error message.
 
 ###cache (optional)
-Default: false
+Default: false <br>
 Forces requests not to be cached by the browser.
 If set to true, requests can be cached by the browser.
 When false, a POST parameter named $.netWebMethodTimeStamp is appended to the request.
 
 ###showLoadingMessage (optional)
-Default: true
+Default: true <br>
 Shows a message while the request is loading. This is useful when it is important to convey that a process is pending.
 If jQueryMobile is detected the spinner will be displayed.  
 If not, a loading message selector must be specified, see loadingMessageSelector.
