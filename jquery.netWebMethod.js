@@ -6,25 +6,37 @@
 (function ($) {
     $.netWebMethod = function (settings) {
 
-        if (typeof (settings.params) == "undefined") {
-            settings.params = { };
-        }
+        applyDefaultsToSettings();
 
         if (typeof (settings.url) == "undefined") {
             throw "Invalid $.netWebMethod call, missing value for parameter: url.";
         }
 
-        if (typeof (settings.cache) == "undefined") {
-            settings.cache = false;
-        }
-
         if (settings.cache == false) {
             settings.params.netWebMethodTimeStamp = new Date().getTime();
         }
-        
+
         var data = JSON.stringify(settings.params);
-        
+
         $.ajax({
+            beforeSend: function () {
+                if (settings.showLoadingMessage == false) return;
+                if (typeof ($.mobile) != "undefined") {
+                    $.mobile.showPageLoadingMsg();
+                }
+                else if (typeof (settings.loadingMessageSelector) != "undefined") {
+                    $(settings.loadingMessageSelector).show();
+                }
+            },
+            complete: function () {
+                if (settings.showLoadingMessage == false) return;
+                if (typeof ($.mobile) != "undefined") {
+                    $.mobile.hidePageLoadingMsg();
+                }
+                else if (typeof (settings.loadingMessageSelector) != "undefined") {
+                    $(settings.loadingMessageSelector).hide();
+                }
+            },
             type: "POST",
             url: settings.url,
             data: data,
@@ -50,8 +62,17 @@
 
 
         return false;
+
+        function applyDefaultsToSettings() {
+
+            if (typeof (settings.cache) == "undefined") settings.cache = false;
+            if (typeof (settings.params) == "undefined") settings.params = {};
+            if (typeof (settings.showLoadingMessage) == "undefined") settings.showLoadingMessage = true;
+
+        }
+
     };
-    
+
     //Attribution for JSON: https://github.com/douglascrockford/JSON-js
     var JSON; if (!JSON) { JSON = {}; }
     (function () {
