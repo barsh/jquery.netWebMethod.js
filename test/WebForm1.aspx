@@ -14,14 +14,14 @@
 
             $("#doSomething").click(function () {
                 $.netWebMethod({
-                    url: 'WebForm1.aspx/DoSomething',
+                    methodName: 'DoSomething'
                 });
                 alert('did something');                
             });
 
             $("#doSomethingWith").click(function () {
                 $.netWebMethod({
-                    url: 'WebForm1.aspx/DoSomethingWith',
+                    methodName: 'DoSomethingWith',
                     params: { favFruit: 'apple', favNumber: 1, isMale: true },
                 });
                 alert('did something with');
@@ -29,14 +29,14 @@
 
             $("#throwException").click(function () {
                 $.netWebMethod({
-                    url: 'WebForm1.aspx/ThrowException',
+                    methodName: 'ThrowException',
                     error: function (error) { alert(error); }
                 });
             });
 
             $("#getDate").click(function () {
                 $.netWebMethod({
-                    url: 'WebForm1.aspx/GetDate',
+                    methodName: 'GetDate',
                     success: function (response) { alert(response); },
                     error: function (error) { alert(error); },
                     loadingMessageSelector: '#loadingMessage'
@@ -45,7 +45,7 @@
 
             $("#getDateWith").click(function () {
                 $.netWebMethod({
-                    url: 'WebForm1.aspx/GetDateWith',
+                    methodName: 'GetDateWith',
                     params: { favFruit: 'apple', favNumber: 1, isMale: true },
                     success: function (response) { alert(response); },
                     error: function (error) { alert(error); },

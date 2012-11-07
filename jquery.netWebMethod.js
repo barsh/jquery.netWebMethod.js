@@ -8,8 +8,8 @@
 
         applyDefaultsToSettings();
 
-        if (typeof (settings.url) == "undefined") {
-            throw "Invalid $.netWebMethod call, missing value for parameter: url.";
+        if (typeof (settings.methodName) == "undefined") {
+            throw "Invalid $.netWebMethod call, missing value for parameter: methodName.";
         }
 
         if (settings.cache == false) {
@@ -38,7 +38,7 @@
                 }
             },
             type: "POST",
-            url: settings.url,
+            url: settings.url + "/" + settings.methodName,
             data: data,
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
@@ -64,7 +64,7 @@
         return false;
 
         function applyDefaultsToSettings() {
-
+            if (typeof (settings.url) == "undefined") settings.url = location.pathname;
             if (typeof (settings.cache) == "undefined") settings.cache = false;
             if (typeof (settings.params) == "undefined") settings.params = {};
             if (typeof (settings.showLoadingMessage) == "undefined") settings.showLoadingMessage = true;

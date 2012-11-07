@@ -4,10 +4,14 @@ jquery.netWebMethod.js
 Make JavaScript calls to ASP.NET WebMethods without ScriptManager  (jQueryMobile compatible)
 
 ## $.netWebMethod(settings);
-settings - A set of key/value pairs that configure the request. All settings are option except url.
+settings - A set of key/value pairs that configure the request. All settings are option except methodName.
 
-### url (required)
-A string n cotaining the URL to which the request is sent. 
+### methodName (required)
+A string containing the webmethod name for the request. 
+
+### url (optional)
+Default: the current page (for example: /path/currentpage.aspx)
+A string containing the URL to which the request is sent. Supplying a url allows WebMethods defined in other pages to be executed.
 
 
 ###params (optional)
@@ -55,28 +59,34 @@ the script tag inside each div with a data-role of page.
 Execute a web method:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/DoSomething',
+        methodName: 'DoSomething',
     });
 
+Execute a web method behind a specific page:
+
+    $.netWebMethod({
+        url: '/path/WebForm1.aspx',
+		methodName: 'DoSomething',
+    });
 
 Pass parameters to a web method:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/DoSomethingWith',
+        methodName: 'DoSomethingWith',
         params: { favFruit: 'apple', favNumber: 1, isMale: true },
     });
 
 Handle errors:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/ThrowException',
+        methodName: 'ThrowException',
         error: function (error) { alert(error); }
     });
 
 Get the current date and time from the server:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/GetDate',
+        methodName: 'GetDate',
         success: function (response) { alert(response); },
         error: function (error) { alert(error); }
     });
@@ -84,7 +94,7 @@ Get the current date and time from the server:
 Pass parameters to a web method that get the current date and time from the server:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/GetDateWith',
+        methodName: 'GetDateWith',
         params: { favFruit: 'apple', favNumber: 1, isMale: true },
         success: function(response) { alert(response); },
         error: function(error) { alert(error); }
@@ -93,7 +103,7 @@ Pass parameters to a web method that get the current date and time from the serv
 Show loading message:
 
     $.netWebMethod({
-        url: 'WebForm1.aspx/GetDate',
+        methodName: 'GetDate',
         success: function (response) { alert(response); },
         error: function (error) { alert(error); },
 		loadingMessageSelector: '#loadingMessage'
