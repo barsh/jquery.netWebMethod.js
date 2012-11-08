@@ -64,7 +64,18 @@
         return false;
 
         function applyDefaultsToSettings() {
-            if (typeof (settings.url) == "undefined") settings.url = location.pathname;
+            if (typeof (settings.url) == "undefined") {
+                if (typeof ($.mobile) != "undefined") {
+                    if (location.hash.substring(0, 2) == "#/") {
+                        settings.url = location.hash.substring(1);
+                        if (settings.url.indexOf("#") > 0) settings.url = settings.url.substring(0, settings.url.indexOf("#"));
+                        if (settings.url.indexOf("?") > 0) settings.url = settings.url.substring(0, settings.url.indexOf("?"));
+                    }
+                }
+                if (typeof (settings.url) == "undefined") {
+                    settings.url = location.pathname;
+                }
+            }
             if (typeof (settings.cache) == "undefined") settings.cache = false;
             if (typeof (settings.params) == "undefined") settings.params = {};
             if (typeof (settings.showLoadingMessage) == "undefined") settings.showLoadingMessage = true;
